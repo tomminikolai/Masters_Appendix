@@ -1,0 +1,83 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: C:/Users/u408220/esp/v5.0/esp-who/components/esp-dl/tutorial/df2img/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Users/u408220/.espressif/tools/ninja/1.10.2/ninja.exe cmTC_2cf15 && [1/2] Building C object CMakeFiles/cmTC_2cf15.dir/src.c.obj
+[2/2] Linking C executable cmTC_2cf15
+FAILED: cmTC_2cf15 
+cmd.exe /C "cd . && C:\Users\u408220\.espressif\tools\xtensa-esp32s3-elf\esp-2022r1-11.2.0\xtensa-esp32s3-elf\bin\xtensa-esp32s3-elf-gcc.exe -mlongcalls  CMakeFiles/cmTC_2cf15.dir/src.c.obj -o cmTC_2cf15   && cd ."
+c:/users/u408220/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/../lib/gcc/xtensa-esp32s3-elf/11.2.0/../../../../xtensa-esp32s3-elf/bin/ld.exe: CMakeFiles/cmTC_2cf15.dir/src.c.obj:(.literal+0x4): undefined reference to `pthread_create'
+c:/users/u408220/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/../lib/gcc/xtensa-esp32s3-elf/11.2.0/../../../../xtensa-esp32s3-elf/bin/ld.exe: CMakeFiles/cmTC_2cf15.dir/src.c.obj:(.literal+0x8): undefined reference to `pthread_detach'
+c:/users/u408220/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/../lib/gcc/xtensa-esp32s3-elf/11.2.0/../../../../xtensa-esp32s3-elf/bin/ld.exe: CMakeFiles/cmTC_2cf15.dir/src.c.obj:(.literal+0xc): undefined reference to `pthread_cancel'
+c:/users/u408220/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/../lib/gcc/xtensa-esp32s3-elf/11.2.0/../../../../xtensa-esp32s3-elf/bin/ld.exe: CMakeFiles/cmTC_2cf15.dir/src.c.obj:(.literal+0x10): undefined reference to `pthread_join'
+c:/users/u408220/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/../lib/gcc/xtensa-esp32s3-elf/11.2.0/../../../../xtensa-esp32s3-elf/bin/ld.exe: CMakeFiles/cmTC_2cf15.dir/src.c.obj:(.literal+0x14): undefined reference to `pthread_atfork'
+c:/users/u408220/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/../lib/gcc/xtensa-esp32s3-elf/11.2.0/../../../../xtensa-esp32s3-elf/bin/ld.exe: CMakeFiles/cmTC_2cf15.dir/src.c.obj:(.literal+0x18): undefined reference to `pthread_exit'
+c:/users/u408220/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/../lib/gcc/xtensa-esp32s3-elf/11.2.0/../../../../xtensa-esp32s3-elf/bin/ld.exe: CMakeFiles/cmTC_2cf15.dir/src.c.obj: in function `main':
+src.c:(.text+0x1c): undefined reference to `pthread_create'
+c:/users/u408220/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/../lib/gcc/xtensa-esp32s3-elf/11.2.0/../../../../xtensa-esp32s3-elf/bin/ld.exe: src.c:(.text+0x26): undefined reference to `pthread_detach'
+c:/users/u408220/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/../lib/gcc/xtensa-esp32s3-elf/11.2.0/../../../../xtensa-esp32s3-elf/bin/ld.exe: src.c:(.text+0x30): undefined reference to `pthread_cancel'
+c:/users/u408220/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/../lib/gcc/xtensa-esp32s3-elf/11.2.0/../../../../xtensa-esp32s3-elf/bin/ld.exe: src.c:(.text+0x3c): undefined reference to `pthread_join'
+c:/users/u408220/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/../lib/gcc/xtensa-esp32s3-elf/11.2.0/../../../../xtensa-esp32s3-elf/bin/ld.exe: src.c:(.text+0x48): undefined reference to `pthread_atfork'
+c:/users/u408220/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/../lib/gcc/xtensa-esp32s3-elf/11.2.0/../../../../xtensa-esp32s3-elf/bin/ld.exe: src.c:(.text+0x50): undefined reference to `pthread_exit'
+collect2.exe: error: ld returned 1 exit status
+ninja: build stopped: subcommand failed.
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: C:/Users/u408220/esp/v5.0/esp-who/components/esp-dl/tutorial/df2img/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Users/u408220/.espressif/tools/ninja/1.10.2/ninja.exe cmTC_26579 && [1/2] Building C object CMakeFiles/cmTC_26579.dir/CheckFunctionExists.c.obj
+[2/2] Linking C executable cmTC_26579
+FAILED: cmTC_26579 
+cmd.exe /C "cd . && C:\Users\u408220\.espressif\tools\xtensa-esp32s3-elf\esp-2022r1-11.2.0\xtensa-esp32s3-elf\bin\xtensa-esp32s3-elf-gcc.exe -mlongcalls  -DCHECK_FUNCTION_EXISTS=pthread_create  CMakeFiles/cmTC_26579.dir/CheckFunctionExists.c.obj -o cmTC_26579  -lpthreads && cd ."
+c:/users/u408220/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/../lib/gcc/xtensa-esp32s3-elf/11.2.0/../../../../xtensa-esp32s3-elf/bin/ld.exe: cannot find -lpthreads
+collect2.exe: error: ld returned 1 exit status
+ninja: build stopped: subcommand failed.
+
+
+
+Determining if the function pthread_create exists in the pthread failed with the following output:
+Change Dir: C:/Users/u408220/esp/v5.0/esp-who/components/esp-dl/tutorial/df2img/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Users/u408220/.espressif/tools/ninja/1.10.2/ninja.exe cmTC_3a591 && [1/2] Building C object CMakeFiles/cmTC_3a591.dir/CheckFunctionExists.c.obj
+[2/2] Linking C executable cmTC_3a591
+FAILED: cmTC_3a591 
+cmd.exe /C "cd . && C:\Users\u408220\.espressif\tools\xtensa-esp32s3-elf\esp-2022r1-11.2.0\xtensa-esp32s3-elf\bin\xtensa-esp32s3-elf-gcc.exe -mlongcalls  -DCHECK_FUNCTION_EXISTS=pthread_create  CMakeFiles/cmTC_3a591.dir/CheckFunctionExists.c.obj -o cmTC_3a591  -lpthread && cd ."
+c:/users/u408220/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/../lib/gcc/xtensa-esp32s3-elf/11.2.0/../../../../xtensa-esp32s3-elf/bin/ld.exe: cannot find -lpthread
+collect2.exe: error: ld returned 1 exit status
+ninja: build stopped: subcommand failed.
+
+
+
+Determining if compiler accepts -pthread failed with the following output:
+Change Dir: C:/Users/u408220/esp/v5.0/esp-who/components/esp-dl/tutorial/df2img/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Users/u408220/.espressif/tools/ninja/1.10.2/ninja.exe cmTC_25ddb && [1/2] Building C object CMakeFiles/cmTC_25ddb.dir/CheckForPthreads.c.obj
+[2/2] Linking C executable cmTC_25ddb
+FAILED: cmTC_25ddb 
+cmd.exe /C "cd . && C:\Users\u408220\.espressif\tools\xtensa-esp32s3-elf\esp-2022r1-11.2.0\xtensa-esp32s3-elf\bin\xtensa-esp32s3-elf-gcc.exe -mlongcalls  CMakeFiles/cmTC_25ddb.dir/CheckForPthreads.c.obj -o cmTC_25ddb  -pthread && cd ."
+xtensa-esp32s3-elf-gcc.exe: error: unrecognized command-line option '-pthread'
+ninja: build stopped: subcommand failed.
+
+
+
